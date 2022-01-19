@@ -1,0 +1,66 @@
+[preprocessing]
+# Input Settings
+file_types = ["flac", "mp3"]
+source = "../datasets/vctk/VCTK-Corpus-0.92/wav48_silence_trimmed"
+category_level = 0 # distance from source to category folder level
+
+# Output Settings
+destination = "dataset/vctk/mel_22050_2048_512_80_72_36"
+hdf_label_key = 'keys'
+
+# Preprocessing Parameters
+sr = 22050
+keep_wave = false
+
+# Data Culling
+min_sequence = 4
+min_category_count = 20
+
+
+[preprocessing.features]
+# Types of features include the following:
+# mel - mel spectrogram (n_bins, chunk_size)
+# stft - short-time fourier transform (1 + n_fft/2, chunk_size)
+# cqt - constant q transform (n_bins, chunk_size)
+# none - none (set keep_wave to true for waveform data)
+type = 'mel'
+
+# number of fft bins
+n_fft = 2048
+
+# size of window (probably best be same as n_fft)
+win_length = 2048
+
+# Number of audio frames between windows
+hop_size = 512
+
+# number of bins (chroma bins in cqt, mel bins for mel)
+n_bins = 80
+
+# Number of time frames per datum (duration between frames = chunk_size * hop_size / sr)
+chunk_size = 72
+
+# Number of overlapping time frames between adjacent datum
+overlap = 36
+
+# Right pads last datum with zeros if true
+padding = true
+
+
+[training]
+train_val_test_split = [0.7, 0.1, 0.2]
+split_seed = 42
+batch_size = 128
+eval_batch_size = 128
+shuffle = true
+max_epochs = 901
+enable_logging = true
+log_dir = "drive/My Drive/code/audio_classify/logs"
+save_freq = 30
+model_dir = "drive/My Drive/code/audio_classify/models"
+
+[training.optimizer]
+type = 'adam' # hard coded, does nothing for now
+lr = 1e-5
+#momentum = 0.9
+amsgrad = true
