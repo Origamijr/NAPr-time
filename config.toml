@@ -1,29 +1,30 @@
-[preprocessing]
+[data]
 # Input Settings
 file_types = ["flac", "mp3"]
-source = "../datasets/vctk/VCTK-Corpus-0.92/wav48_silence_trimmed"
+raw_data = "../datasets/vctk/VCTK-Corpus-0.92/wav48_silence_trimmed"
 category_level = 0 # distance from source to category folder level
 
 # Output Settings
-destination = "dataset/vctk/mel_22050_2048_512_80_72_36"
+preprocessed_data = "dataset/vctk/wav_22050_512_36_0"
 hdf_label_key = 'keys'
+single_file = true
 
 # Preprocessing Parameters
 sr = 22050
-keep_wave = false
+keep_wave = true
 
 # Data Culling
-min_sequence = 4
+min_sequence = 6
 min_category_count = 20
 
 
-[preprocessing.features]
+[data.features]
 # Types of features include the following:
 # mel - mel spectrogram (n_bins, chunk_size)
 # stft - short-time fourier transform (1 + n_fft/2, chunk_size)
 # cqt - constant q transform (n_bins, chunk_size)
 # none - none (set keep_wave to true for waveform data)
-type = 'mel'
+type = 'none'
 
 # number of fft bins
 n_fft = 2048
@@ -38,10 +39,10 @@ hop_size = 512
 n_bins = 80
 
 # Number of time frames per datum (duration between frames = chunk_size * hop_size / sr)
-chunk_size = 72
+chunk_size = 32
 
 # Number of overlapping time frames between adjacent datum
-overlap = 36
+overlap = 0
 
 # Right pads last datum with zeros if true
 padding = true

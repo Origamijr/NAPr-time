@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 from torch.nn.utils.rnn import PackedSequence, pack_padded_sequence, pad_packed_sequence
 
-from modules import LayerFactory, parse_config
+from models.module_builder import LayerFactory, parse_config
 
 from config import CONFIG
 

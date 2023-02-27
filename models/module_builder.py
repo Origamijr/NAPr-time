@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import inspect
 
-from utilities import filter_kwargs
+from utils import filter_kwargs
 
 class LayerFactory:
     """

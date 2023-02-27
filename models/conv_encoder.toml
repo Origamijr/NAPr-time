@@ -1,0 +1,44 @@
+# Convolutional Encoder processes 2d spectrogram info as multichanneled 1D data
+[model.convolutional_encoder.initialization]
+    type = 'kaiming_normal' # TODO hard coded rn, doesn't do anything
+    nonlinearity = 'linear'
+    
+[[model.convolutional_encoder.stack]]
+    type = 'conv1d'
+    in_channels = 1
+    out_channels = 4
+    kernel_size = 2
+    dilation = 2
+
+    [[model.convolutional_encoder.stack]]
+    type = 'relu'
+
+    [[model.convolutional_encoder.stack]]
+    type = 'sequential'
+    repeat = 11
+
+        [[model.convolutional_encoder.stack.cell]]
+        type = 'conv1d'
+        in_channels = 4
+        out_channels = 4
+        kernel_size = 2
+        dilation = 1
+
+        [[model.convolutional_encoder.stack.cell]]
+        type = 'relu'
+
+    [[model.convolutional_encoder.stack]]
+    type = 'conv1d'
+    in_channels = 4
+    out_channels = 16
+    kernel_size = 1
+
+    [[model.convolutional_encoder.stack]]
+    type = 'relu'
+
+[model.convolutional_encoder.rnn]
+    type = 'gru'
+    input_size = 16
+    hidden_size = 16
+    num_layers = 1
+    batch_first = true

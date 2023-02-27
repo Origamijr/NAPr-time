@@ -10,10 +10,10 @@ from torch.utils.tensorboard import SummaryWriter
 import toml
 
 from dataset import split_dataset
-from utilities import MovingAverage, filter_kwargs, is_interactive
+from utils import MovingAverage, filter_kwargs, is_interactive
 
 if is_interactive():
-    from tqdm.notebook import tqdm, trange
+    from tqdm.notebook import tqdm
 else:
     from tqdm import tqdm
 
@@ -178,10 +178,8 @@ def evaluate_on_data(model: nn.Module, dataloader: DataLoader):
 
 if __name__ == "__main__":
     from dataset import H5SpecSeqDataset
-    from model import CRNN_Classifier
-    from torchvision.transforms import Normalize, Compose
-
-    data_transform = Compose([torch.tensor, Normalize(-57.6, 19)])
+    from models.model import CRNN_Classifier
+    
     dataset = H5SpecSeqDataset(transform=data_transform)
     
     model = CRNN_Classifier()

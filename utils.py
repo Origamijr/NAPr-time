@@ -1,7 +1,5 @@
 import librosa
 import inspect
-from config import CONFIG
-
 
 def is_interactive():
     import __main__ as main
@@ -9,7 +7,8 @@ def is_interactive():
 
 
 def show_spectrogram(s):
-    librosa.display.specshow(s,sr=CONFIG['preprocessing']['sr'])
+    from config import data_config
+    librosa.display.specshow(s,sr=data_config()['sr'])
 
 
 class MovingAverage:
