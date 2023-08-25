@@ -1,3 +1,5 @@
+Dropped. Successor project (RASPPPy)[https://github.com/Origamijr/RASPPPy]
+
 # NAPr-time
 Repository for Neural Audio Processing in real-time (hopefully). At the moment, contains the code for my [previous repository](https://github.com/Origamijr/Audio-Classify). I am in the process of rewriting the code.
 
